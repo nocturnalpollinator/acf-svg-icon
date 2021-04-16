@@ -256,40 +256,6 @@ class acf_field_svg_icon extends acf_field {
 	}
 
 	/**
-	 * Display the css based on the vars given for dynamic fonts url.
-	 *
-	 * @since 1.0.0
-	 */
-	public function display_svg() {
-		/**
-		 * The svg's files URLs
-		 *
-		 * @param array $font_urls the default svg file url
-		 *
-		 * @since 1.0.0
-		 *
-		 */
-		$files = $this->get_all_svg_files();
-		if ( empty( $files ) ) {
-			return;
-		}
-
-		echo '<!-- ACF SVG ICON output dummies start-->';
-		echo '<div style="display: none !important;">';
-		foreach ( $files as $file ) {
-			if ( ! is_file( $file['file'] ) ) {
-				continue;
-			}
-			
-			$svg = file_get_contents( $file['file'] );
-			
-			echo $svg;
-		}
-		echo '</div>';
-		echo '<!-- ACF SVG ICON output dummies end-->';
-	}
-
-	/**
 	 * Enqueue assets for the SVG icon field in admin
 	 *
 	 * @since 1.0.0
@@ -303,15 +269,6 @@ class acf_field_svg_icon extends acf_field {
 
 		wp_enqueue_script( 'acf-input-svg-icon' );
 		wp_enqueue_style( 'acf-input-svg-icon' );
-	}
-
-	/**
-	 * Display SVG style in head.
-	 *
-	 * @since 1.0.0
-	 */
-	public function input_admin_footer() {
-		$this->display_svg();
 	}
 
 	/**
